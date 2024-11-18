@@ -37,7 +37,7 @@
     <script>
         async function getRandomJoke() {
             try {
-                const response = await fetch('https://votre-api.render.com/api/v1/jokes/random');
+                const response = await fetch('https://carambar-y6ch.onrender.com/api/v1/jokes/random');
                 const data = await response.json();
                 document.getElementById('joke').textContent = data.content;
             } catch (error) {
