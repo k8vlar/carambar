@@ -44,6 +44,7 @@ exports.getRandomJoke = async (req, res) => {
       res.status(404).json({ message: "Aucune blague trouvée" });
     }
   } catch (error) {
+    console.error("Erreur lors de la récupération d'une blague aléatoire:", error);
     res.status(500).json({ message: error.message });
   }
 };

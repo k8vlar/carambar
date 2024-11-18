@@ -23,7 +23,7 @@ const jokeController = require("../../controllers/jokeController");
  *       400:
  *         description: Erreur de requête
  */
-router.post("/jokes", jokeController.addJoke);
+router.post("/", jokeController.addJoke);
 
 /**
  * @swagger
@@ -35,7 +35,7 @@ router.post("/jokes", jokeController.addJoke);
  *       200:
  *         description: Liste de toutes les blagues
  */
-router.get("/jokes", jokeController.getAllJokes);
+router.get("/", jokeController.getAllJokes);
 
 /**
  * @swagger
@@ -55,7 +55,7 @@ router.get("/jokes", jokeController.getAllJokes);
  *       404:
  *         description: Blague non trouvée
  */
-router.get("/jokes/:id", jokeController.getJokeById);
+router.get("/:id", jokeController.getJokeById);
 
 /**
  * @swagger
@@ -69,6 +69,6 @@ router.get("/jokes/:id", jokeController.getJokeById);
  *       404:
  *         description: Aucune blague trouvée
  */
-router.get("/jokes/random", jokeController.getRandomJoke);
+router.get("/random", jokeController.getRandomJoke);
 
 module.exports = router;
