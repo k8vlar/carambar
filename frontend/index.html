@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blagues Carambar & Co</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        #joke {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blagues Carambar & Co</h1>
+        <div id="joke">Cliquez sur le bouton pour afficher une blague !</div>
+        <button onclick="getRandomJoke()">Nouvelle blague</button>
+    </div>
+    <script>
+        async function getRandomJoke() {
+            try {
+                const response = await fetch('https://votre-api.render.com/api/v1/jokes/random');
+                const data = await response.json();
+                document.getElementById('joke').textContent = data.content;
+            } catch (error) {
+                console.error('Erreur:', error);
+                document.getElementById('joke').textContent = 'Erreur lors du chargement de la blague.';
+            }
+        }
+    </script>
+</body>
+</html>
