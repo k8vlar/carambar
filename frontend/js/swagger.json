@@ -1,0 +1,338 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API Carambar",
+    "description": "<p>API</p><p>description</p>",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local server"
+    },
+    {
+      "url": "http://localhost:8081",
+      "description": "Remote server"
+    },
+    {
+      "url": "http://demo.server"
+    },
+    {
+      "url": "http://demo2.server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "blague",
+      "description": "tout ce qui concerne les blagues"
+    },
+    {
+      "name": "utilisateurs",
+      "description": "tout ce qui concerne les utilisateurs"
+    }
+  ],
+  "paths": {
+    "/jokes": {
+      "get": {
+        "tags": ["blague"],
+        "summary": "obtenir toutes les blagues",
+        "operationId": "getAllJokes",
+        "responses": {
+          "200": {
+            "description": "renvoie une collection de blagues",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayJokes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Renvoie une erreur, Aucun élément trouvé"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["blague"],
+        "summary": "ajouter une blague",
+        "operationId": "addJoke",
+        "requestBody": {
+          "description": "Créer une blague la plus drole possible",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": { "type": "string" },
+                  "author": { "type": "string" },
+                  "category": { "type": "string" }
+                },
+                "required": ["text", "author", "category"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "La blague a été ajoutée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jokes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "La blague n'a pas été ajoutée"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["utilisateurs"],
+        "summary": "obtenir tous les utilisateurs",
+        "operationId": "getAllUsers",
+        "responses": {
+          "200": {
+            "description": "renvoie une collection d'utilisateurs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayUsers"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Renvoie une erreur, Aucun élément trouvé"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["utilisateurs"],
+        "summary": "ajouter un utilisateur",
+        "operationId": "addUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "L'utilisateur a été ajouté avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "L'utilisateur n'a pas été ajouté"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+        "get": {
+          "tags": ["utilisateurs"],
+          "summary": "récupérer un utilisateur",
+          "description": "récupère un utilisateur selon son id",
+          "operationId": "getUser",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description":"identifiant de l'utilisateur",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "renvoie un utilisateurs",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete":{
+            "tags": ["utilisateurs"],
+            "summary": "supprimer un utilisateur",
+            "description": "supprime un utilisateur selon son id",
+            "operationId": "deleteUser",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "identifiant de l'utilisateur",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                        }
+                        }
+                        ],
+                        "responses": {
+                            "204": {
+                                "description": "l'utilisateur a été supprimé"
+                                }
+                                }
+                                
+        }
+      }
+  },
+  "components": {
+    "schemas": {
+      "Jokes": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "text": { "type": "string" },
+          "category": { "type": "string" },
+          "user": {
+            "type": "string",
+            "format": "iri-reference",
+            "default": "users/{id}"
+          }
+        }
+      },
+      "ArrayJokes": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Jokes"
+        },
+        "example": [
+          {
+            "id": 1,
+            "text": "Why don't scientists trust atoms?",
+            "user": "John",
+            "category": "science"
+          },
+          {
+            "id": 2,
+            "text": "Why don't scientists trust atoms?",
+            "user": "John",
+            "category": "science"
+          }
+        ]
+      },
+      "Users": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" },
+          "role": { "type": "string" },
+          "jokes": { "$ref": "#/components/schemas/ArrayJokes" },
+          "jokes_id": { "type": "array", "items": { "type": "integer" } }
+        },
+        "example": 
+          {
+            "id": 1,
+            "name": "Bobby",
+            "email": "bobby.junior@aiecarambar.com",
+            "password": ".......",
+            "role": "admin",
+            "jokes": [
+              {
+                "id": 1,
+                "text": "Why don't scientists trust atoms?",
+                "author": "John",
+                "category": "science"
+              }]
+          }
+      },
+      "ArrayUsers": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Users"
+        },
+        "example": [
+          {
+            "id": 1,
+            "name": "Bobby",
+            "email": "bobby.junior@aiecarambar.com",
+            "password": ".......",
+            "role": "admin",
+            "jokes": [
+              {
+                "id": 1,
+                "text": "Why don't scientists trust atoms?",
+                "author": "John",
+                "category": "science"
+              },
+              {
+                "id": 2,
+                "text": "Why don't scientists trust atoms?",
+                "author": "John",
+                "category": "science"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "name": "John",
+            "email": "John.doe@outlook.com",
+            "password": ".......",
+            "role": "admin",
+            "jokes": [
+              {
+                "id": 1,
+                "text": "Why don't scientists trust atoms?",
+                "author": "John",
+                "category": "science"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
