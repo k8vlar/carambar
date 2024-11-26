@@ -4,7 +4,7 @@ const jokeController = require("../../controllers/jokeController");
 
 /**
  * @swagger
- * /api/v1/jokes:
+ * /routes/v1/jokes:
  *   post:
  *     summary: Ajouter une nouvelle blague
  *     tags: [Jokes]
@@ -27,7 +27,7 @@ router.post("/", jokeController.addJoke);
 
 /**
  * @swagger
- * /api/v1/jokes:
+ * /routes/v1/jokes:
  *   get:
  *     summary: Obtenir toutes les blagues
  *     tags: [Jokes]
@@ -39,7 +39,7 @@ router.get("/", jokeController.getAllJokes);
 
 /**
  * @swagger
- * /api/v1/jokes/{id}:
+ * /routes/v1/jokes/{id}:
  *   get:
  *     summary: Obtenir une blague par son ID
  *     tags: [Jokes]
@@ -59,7 +59,7 @@ router.get("/:id", jokeController.getJokeById);
 
 /**
  * @swagger
- * /api/v1/jokes/random:
+ * /routes/v1/jokes/random:
  *   get:
  *     summary: Obtenir une blague aléatoire
  *     tags: [Jokes]
