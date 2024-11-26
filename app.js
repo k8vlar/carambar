@@ -6,7 +6,8 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const path = require("path");
 const Jokes = require("./models/joke");
-
+const { addJoke, getAllJokes, getJokeById, getRandomJoke } = require("./controllers/jokeController");
+const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
 app.use(cors());
@@ -34,7 +35,10 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 // console.log(swaggerDocs);
 // Middleware
-// app.use(express.static(path.join(__dirname, "frontend")));
+// Servir les fichiers statiques depuis le dossier 'frontend'
+app.use(express.static(path.join(__dirname, "frontend")));
+// Middleware pour parser le JSON des requêtes POST
+app.use(bodyParser.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -45,31 +49,13 @@ app.get("/", (req, res) => {
 });
 
 
-app.get('/jokes/random', async (req, res) => {
-  try {
-      const joke = await Jokes.findOne({
-          order: sequelize.random(),
-      });
-      if (joke) {
-          res.json({ content: `${joke.question} - ${joke.reponse}` });
-      } else {
-          res.status(404).json({ error: 'Aucune blague trouvée' });
-      }
-  } catch (error) {
-      res.status(500).json({ error: 'Erreur du serveur' });
-  }
-});
-app.get("/test-jokes", async (req, res) => {
-  try {
-    const jokesall = await Jokes.findAll();
-    res.json(jokesall);
-  } catch (error) {
-    console.error("Erreur:", error);
-    res
-      .status(500)
-      .json({ message: "Erreur lors de la récupération des blagues" });
-  }
-});
+// Routes API
+app.post('/jokes', addJoke); // Ajouter une nouvelle blague
+app.get('/jokes', getAllJokes); // Consulter toutes les blagues
+app.get('/jokes/random', getRandomJoke); // Consulter une blague aléatoire
+app.get('/jokes/:id', getJokeById); // Consulter une blague par ID
+
+
 
 // Synchronisation de la base de données et démarrage du serveur
 sequelize

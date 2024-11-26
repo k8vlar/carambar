@@ -18,12 +18,29 @@
             text-align: center;
             
         }
+        #question {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+        #answer {
+            font-size: 20px;
+            color: #555;
+            transition: filter 0.3s ease; /* Transition douce */
+        }
+        #answer.blurred {
+    filter: blur(5px);
+}
         #joke-container {
             border-radius: 10px; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
             display: inline-block; 
             margin-top: 20px; 
+            padding: 20px;
+
         }
+        #joke-container:hover #answer.blurred {
+    filter: blur(0);
+}
         #joke {
             margin-bottom: 20px;
             font-size: 25px;
@@ -50,24 +67,15 @@
         <img id="logo" src="../images/logo-rose.png" alt="Logo Blagues Carambar & Co"> 
         <h1>Blagues Carambar & Co</h1>
         <div id="joke-container">
-            <img id="border-image" src="images/border-image.png" alt="Image Englobante"> 
-        <div id="joke">Cliquez sur le bouton pour afficher une blague !</div>
+            <div id="question">Cliquez sur le bouton pour afficher une blague !</div>
+            <div id="answer">Réponse ici</div>
+        </div>
+        
         <button onclick="getRandomJoke()">Nouvelle blague</button>
         <div>
         </div>
         </div>
     </div>
-    <script defer>
-        async function getRandomJoke() {
-            try {
-                const response = await fetch('/jokes/random'); 
-                const data = await response.json();
-                document.getElementById('joke').textContent = data.content;
-            } catch (error) {
-                console.error('Erreur:', error);
-                document.getElementById('joke').textContent = 'Erreur lors du chargement de la blague';
-            }
-        }
-    </script>
+    <script src="./script.js" defer></script>
 </body>
 </html>
