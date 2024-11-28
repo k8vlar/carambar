@@ -69,13 +69,44 @@ app.get("/", (req, res) => {
  *             properties:
  *               question:
  *                 type: string
- *                 description: La question de la blague.
+ *                 description: La question de la blague
  *               reponse:
  *                 type: string
- *                 description: La réponse de la blague.
+ *                 description: La réponse de la blague
  *     responses:
  *       201:
- *         description: Blague ajoutée avec succès.
+ *         description: Blague ajoutée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: ID de la nouvelle blague
+ *                 message:
+ *                   type: string
+ *                   example: Blague ajoutée avec succès
+ *       400:
+ *         description: Données invalides
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: La question et la réponse sont requises
+ *       500:
+ *         description: Erreur serveur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Erreur lors de l'ajout de la blague
  */
 app.post('/jokes', addJoke); // Ajouter une nouvelle blague
 
@@ -87,7 +118,30 @@ app.post('/jokes', addJoke); // Ajouter une nouvelle blague
  *     tags: [Jokes]
  *     responses:
  *       200:
- *         description: Liste des blagues.
+ *         description: Liste des blagues
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   question:
+ *                     type: string
+ *                   reponse:
+ *                     type: string
+ *       500:
+ *         description: Erreur serveur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Erreur lors de la récupération des blagues
  */
 app.get('/jokes', getAllJokes); // Consulter toutes les blagues
 
@@ -97,6 +151,40 @@ app.get('/jokes', getAllJokes); // Consulter toutes les blagues
  *   get:
  *     summary: Consulter une blague aléatoire
  *     tags: [Jokes]
+ *     responses:
+ *       200:
+ *         description: Une blague aléatoire
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 question:
+ *                   type: string
+ *                 reponse:
+ *                   type: string
+ *       404:
+ *         description: Aucune blague trouvée
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Aucune blague disponible
+ *       500:
+ *         description: Erreur serveur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Erreur lors de la récupération d'une blague aléatoire
  */
 app.get('/jokes/random', getRandomJoke); // Consulter une blague aléatoire
 
@@ -112,10 +200,41 @@ app.get('/jokes/random', getRandomJoke); // Consulter une blague aléatoire
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID de la blague à consulter.
+ *         description: ID de la blague à consulter
  *     responses:
  *       200:
- *         description: Détails de la blague.
+ *         description: Détails de la blague
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 question:
+ *                   type: string
+ *                 reponse:
+ *                   type: string
+ *       404:
+ *         description: Blague non trouvée
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Blague non trouvée
+ *       500:
+ *         description: Erreur serveur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Erreur lors de la récupération de la blague
  */
 app.get('/jokes/:id', getJokeById); // Consulter une blague par ID
 
