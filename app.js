@@ -8,11 +8,9 @@ const app = express();
 const cors = require("cors");
 
 app.use(cors({
-  origin: 'https://k8vlar.github.io/carambarfrontend/',
-  methods: ['GET', 'POST','DELETE','PUT'],
-  allowedHeaders: ['Content-Type'],
-  credentials:true
-
+  origin: 'https://k8vlar.github.io/carambarfrontend',
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'], 
 }));
 app.use(express.json());
 
