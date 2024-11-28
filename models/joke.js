@@ -27,12 +27,3 @@ Jokes.init(
 );
 
 module.exports = Jokes;
-
-// const Joke = sequelize.define("Joke", {
-//   content: {
-//     type: DataTypes.JSON,
-//     allowNull: false,
-//   },
-// });
-
-// module.exports = Joke;

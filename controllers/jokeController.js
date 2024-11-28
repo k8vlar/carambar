@@ -53,3 +53,19 @@ exports.getRandomJoke = async (req, res) => {
   }
 };
 
+// Supprimer une blague par ID
+exports.deleteJoke = async (req, res) => {
+  try {
+    const result = await Jokes.destroy({
+      where: { id: req.params.id }
+    });
+    
+    if (result) {
+      res.status(204).send(); // Envoi d'une réponse 204 No Content si la suppression est réussie
+    } else {
+      res.status(404).json({ message: "Blague non trouvée" }); // Si aucune blague n'est trouvée avec cet ID
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message }); // Gestion des erreurs serveur
+  }
+};
