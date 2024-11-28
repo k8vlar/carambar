@@ -1,6 +1,6 @@
 const express = require("express");
 const sequelize = require("./database");
-const setupSwagger = require("./config/swagger"); Swagger
+const setupSwagger = require("./config/swagger");
 const path = require("path");
 const jokeRoutes = require("./routes/v1/jokes");
 
