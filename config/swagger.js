@@ -12,7 +12,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "https://carambar-y6ch.onrender.com/jokes",
+        url: "https://k8vlar.github.io/carambarfrontend/",
       },
     ],
   },
