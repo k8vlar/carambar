@@ -38,7 +38,7 @@ Le serveur démarre par défaut sur le port 3000.
 Documentation API
 La documentation complète de l'API est disponible via Swagger UI. Vous pouvez y accéder en visitant /api-docs une fois le serveur démarré.
 
-Lien vers la documentation Swagger
+https://carambar-y6ch.onrender.com/api-docs/
 
 Déploiement
 L'API est déployée sur Render.com. Vous pouvez y accéder via l'URL suivante :
@@ -48,7 +48,7 @@ https://carambar-y6ch.onrender.com/
 Frontend
 Le frontend associé à cette API est développé séparément et déployé sur GitHub Pages. Vous pouvez trouver le repository du frontend ici :
 
-[https://github.com/k8vlar/carambarfrontend]
+https://github.com/k8vlar/carambarfrontend
 
 Contribution
 Les contributions à ce projet sont les bienvenues. N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
