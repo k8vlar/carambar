@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blagues Carambar & Co</title>
+    <style>
+       * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+        background-color: #fedb27;
+        padding: 10px 0;
+        z-index: 1000;
+    }
+    #logo {
+        display: block;
+        margin: 0 auto;
+        width: 1400px;
+        height: 200px;
+        padding: 30px;
+
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+        min-height: 100vh; 
+        padding-top: 60px; 
+        background-image:  linear-gradient(to bottom right,  #fedb27 67%, #e3097e 33%);
+        }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; 
+    }
+    #question {
+        font-size: 25px;
+        margin-bottom: 10px;
+        color: blue;
+        
+    }
+    #answer {
+        font-size: 20px;
+        color: #e3097e;
+        font-weight: bold;
+        transition: filter 0.3s ease;
+        text-align: center;
+    }
+    #answer.blurred {
+        filter: blur(5px);
+    }
+    #joke-container {
+        border-radius: 10px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+        display: inline-block; 
+        margin-top: 20px; 
+        padding: 20px;
+
+    }
+    #joke-container:hover #answer.blurred {
+        filter: blur(0);
+    }
+    #joke {
+        margin-bottom: 20px;
+        font-size: 25px;
+
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: rgba(227, 9, 126, 0.8);
+        color: white;
+        border: white solid 1px;
+        border-radius: 10px;
+        transition: width 0.3s ease-in-out; 
+        width: 200px;
+    }
+    
+    button:hover {
+        width: 230px; 
+    }
+
+    #border-image {
+        width: 100%; 
+        max-width: 400px; 
+    }
+    img{
+        width: 100%;
+        height: 100%;
+
+    }
+    h1{
+        color: #e3097e;
+    }
+    
+    </style>
+</head>
+<header>
+    <img id="logo" src="./images/logo-rose.png" alt="Logo">
+</header>
+<body>
+    <div class="container">
+        <h1>Blagues Carambar & Co</h1>
+        <div id="joke-container">
+            <div id="question">Cliquez sur le bouton pour afficher une blague !</div>
+            <div id="answer">Réponse ici</div>
+        </div>
+        
+        <button onclick="getRandomJoke()">Nouvelle blague</button>
+    </div>
+    <script src="./script.js" defer></script>
+</body>
+</html>
