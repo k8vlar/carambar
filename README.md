@@ -40,11 +40,6 @@ La documentation complète de l'API est disponible via Swagger UI. Vous pouvez y
 
 https://carambar-y6ch.onrender.com/api-docs/
 
-Déploiement
-L'API est déployée sur Render.com. Vous pouvez y accéder via l'URL suivante :
-
-https://carambar-y6ch.onrender.com/
-
 Frontend
 Le frontend associé à cette API est développé séparément et déployé sur GitHub Pages. Vous pouvez trouver le repository du frontend ici :
 
